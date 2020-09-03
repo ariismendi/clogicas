@@ -40,6 +40,7 @@ void setup(){
   Serial.begin(115200);
   pinMode (button1value_pin, INPUT);
   pinMode (button2value_pin, INPUT);
+
   
   ledcAttachPin(greenLed, ledChannel0);
   ledcAttachPin(redLed, ledChannel1);
@@ -48,7 +49,11 @@ void setup(){
  ledcSetup(ledChannel0, freq, resolution);
  ledcSetup(ledChannel1, freq, resolution);
  ledcSetup(ledChannel2, freq, resolution);
-  
+
+  digitalWrite(greenLed, HIGH);
+  digitalWrite(redLed, HIGH);
+  digitalWrite(blueLed, HIGH);
+  delay(1000);
 }
  
 void loop(){
@@ -71,19 +76,19 @@ void loop(){
   Serial.println(potentiometer1_value); //para ver el valor que toma el potenciometro en el monitor serial
   delay(500);
 
-  if (potentiometer1_value <= 819){ //AND
+  if ((potentiometer1_value >= 0) && (potentiometer1_value <= 819)){ //AND
     
-    if (button1value == 0 && button2value == 0){ 
+    if (button1_value == 0 && button2_value == 0){ 
       color(0, 0, 0);  //apagado
       delay(1000);    
     }
     
-    else if (button1value == 0 && button2value == 1){ 
+    else if (button1_value == 0 && button2_value == 1){ 
       color(0, 0, 0);  //apagado
       delay(1000);     
     }
     
-    else if (button1value == 1 && button2value == 0){
+    else if (button1_value == 1 && button2_value == 0){
       color(0, 0, 0);  //apagado
       delay(1000);
     }
@@ -94,19 +99,19 @@ void loop(){
     }
   }
   
-  else if (potentiometer1_value > 819 && potentiometer1_value <= 1638 ){ //OR
+ /* else if (potentiometer1_value > 819 && potentiometer1_value <= 1638 ){ //OR
     
-    if (button1value == 0 && button2value == 0){ 
+    if (button1_value == 0 && button2_value == 0){ 
       color(0, 0, 0);  //apagado
       delay(1000);   
     }
     
-    else if (button1value == 1 && button2value == 0){ 
+    else if (button1_value == 1 && button2_value == 0){ 
       color(255, 0, 255); //color magenta?
       delay(1000);     
     }
     
-    else if (button1value == 0 && button2value == 1){
+    else if (button1_value == 0 && button2_value == 1){
       color(255, 0, 255);//color magenta?
       delay(1000);
     }
@@ -119,15 +124,15 @@ void loop(){
   
   else if (potentiometer1_value > 1638 && potentiometer1_value <= 2457){ //NANDEEEKUREWAAAAAA!!!
     
-      if (button1value == 0 && button2value == 0){ 
+      if (button1_value == 0 && button2_value == 0){ 
       color(255, 255, 0);  //amarillo?
       delay(1000);
       }
-      else if (button1value == 0 && button2value == 1){ 
+      else if (button1_value == 0 && button2_value == 1){ 
       color(255, 255, 0);  //amarillo?
       delay(1000);
       }
-      else if (button1value == 1 && button2value == 0){ 
+      else if (button1_value == 1 && button2_value == 0){ 
       color(255, 255, 0);  //amarillo?
       delay(1000);
       }
@@ -139,17 +144,17 @@ void loop(){
   
   else if (potentiometer1_value > 2457 && potentiometer1_value <= 3276){//NOR
     
-      if (button1value == 0 && button2value == 0){ 
+      if (button1_value == 0 && button2_value == 0){ 
       color(0, 0, 255);  //azul
       delay(1000);
       }
       
-      else if (button1value == 0 && button2value == 1){ 
+      else if (button1_value == 0 && button2_value == 1){ 
       color(0, 0, 0);  //apagado
       delay(1000);
       }
       
-      else if (button1value == 1 && button2value == 0){ 
+      else if (button1_value == 1 && button2_value == 0){ 
       color(0, 0, 0);  //apagado
       delay(1000);
       }
@@ -161,17 +166,17 @@ void loop(){
   }
   
   else { //XOR
-    if (button1value == 0 && button2value == 0){ 
+    if (button1_value == 0 && button2_value == 0){ 
       color(0, 0, 255);  //apagado
       delay(1000);
       }
       
-      else if (button1value == 0 && button2value == 1){ 
+      else if (button1_value == 0 && button2_value == 1){ 
       color(0, 255, 0);  //verde
       delay(1000);
       }
       
-      else if (button1value == 1 && button2value == 0){ 
+      else if (button1_value == 1 && button2_value == 0){ 
       color(0, 255, 0);  //verde
       delay(1000);
       }
@@ -180,7 +185,7 @@ void loop(){
       color(0, 0, 0);  //apagado
       delay(1000);
       }
-  }
+  } */
 }
 
 void color(int red, int green, int blue){
