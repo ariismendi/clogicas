@@ -62,27 +62,22 @@ void loop(){
  // button2value = 1;
   
   //Representar salida pulsador en monitor serial
-  Serial.print(button1_value);
-  Serial.print(button2_value);
+//  Serial.print(button1_value);
+//  Serial.print(button2_value);
   
   //lectura potenciometro
   potentiometer1_value = analogRead(potentiometer1_pin);
   
   //potentiometer1_value = 100;
-  //Serial.println(potentiometer1_value); //para ver el valor que toma el potenciometro en el monitor serial
+  Serial.println(potentiometer1_value); //para ver el valor que toma el potenciometro en el monitor serial
 
-  if (potentiometer1_value <= 819){ //AND
-
+ if (potentiometer1_value <= 819){ //AND
+  
     if (button1_value && button2_value){ 
       color(0, 255, 255);  //ROJO
       delay(1000);      
     }
-    
-   else if ((button1_value == 0) && (button2_value == 0)){
-      color(0, 255, 255);
-      delay(1000);
-   }
-    
+       
     else{
       color(255, 255, 255);
       delay(1000);
@@ -90,93 +85,56 @@ void loop(){
     
   }
   
- /* else if (potentiometer1_value > 819 && potentiometer1_value <= 1638 ){ //OR
+ else if ((potentiometer1_value > 819) && (potentiometer1_value <= 1638)){ //OR
     
-    if (button1_value == 0 && button2_value == 0){ 
-      color(0, 0, 0);  //apagado
+    if (button1_value || button2_value){ 
+      color(0, 255, 0);  //magenta (?)
       delay(1000);   
     }
-    
-    else if (button1_value == 1 && button2_value == 0){ 
-      color(255, 0, 255); //color magenta?
-      delay(1000);     
-    }
-    
-    else if (button1_value == 0 && button2_value == 1){
-      color(255, 0, 255);//color magenta?
-      delay(1000);
-    }
-    
+  
     else {
-      color(255, 0, 255); //color magenta?
+      color(255, 255, 255); //apagado
       delay(1000);
   }
   }
   
-  else if (potentiometer1_value > 1638 && potentiometer1_value <= 2457){ //NANDEEEKUREWAAAAAA!!!
+  else if ((potentiometer1_value > 1638) && (potentiometer1_value <= 2457)){ //NAND
     
-      if (button1_value == 0 && button2_value == 0){ 
-      color(255, 255, 0);  //amarillo?
+      if (button1_value &&  button2_value){ 
+      color(255, 255, 255);  //apagado
       delay(1000);
       }
-      else if (button1_value == 0 && button2_value == 1){ 
-      color(255, 255, 0);  //amarillo?
-      delay(1000);
-      }
-      else if (button1_value == 1 && button2_value == 0){ 
-      color(255, 255, 0);  //amarillo?
-      delay(1000);
-      }
+    
       else { 
-      color(0, 0, 0);  //apagado
+      color(0, 150, 255);  //amarillo
       delay(1000);
-       }
+      }
   }
   
-  else if (potentiometer1_value > 2457 && potentiometer1_value <= 3276){//NOR
+  else if ((potentiometer1_value > 2457) && (potentiometer1_value <= 3276)){//NOR
     
-      if (button1_value == 0 && button2_value == 0){ 
-      color(0, 0, 255);  //azul
+      if (button1_value || button2_value){ 
+      color(255, 255, 255);  //apagado
       delay(1000);
       }
       
-      else if (button1_value == 0 && button2_value == 1){ 
-      color(0, 0, 0);  //apagado
-      delay(1000);
-      }
-      
-      else if (button1_value == 1 && button2_value == 0){ 
-      color(0, 0, 0);  //apagado
-      delay(1000);
-      }
-      
-      else { 
-      color(0, 0, 0);  //apagado
+      else{ 
+      color(255, 255, 0);  //apagado
       delay(1000);
       }
   }
   
   else { //XOR
-    if (button1_value == 0 && button2_value == 0){ 
-      color(0, 0, 255);  //apagado
-      delay(1000);
-      }
-      
-      else if (button1_value == 0 && button2_value == 1){ 
-      color(0, 255, 0);  //verde
-      delay(1000);
-      }
-      
-      else if (button1_value == 1 && button2_value == 0){ 
-      color(0, 255, 0);  //verde
+    if (button1_value ^ button2_value){ 
+      color(255, 0, 255); 
       delay(1000);
       }
       
       else { 
-      color(0, 0, 0);  //apagado
+      color(255, 255, 255);
       delay(1000);
       }
-  } */
+  }
 }
 
 void color(int red, int green, int blue){
