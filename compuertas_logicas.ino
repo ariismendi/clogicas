@@ -13,8 +13,8 @@ int potentiometer1_pin = 36;
 
 //Inicializacion
 
-int button1_value = 0;
-int button2_value = 0;
+bool button1_value = 0;
+bool button2_value = 0;
 
 int potentiometer1_value;
 
@@ -62,36 +62,32 @@ void loop(){
  // button2value = 1;
   
   //Representar salida pulsador en monitor serial
-  //Serial.print(button1value);
-  //Serial.print(button2value);
+  Serial.print(button1_value);
+  Serial.print(button2_value);
   
   //lectura potenciometro
   potentiometer1_value = analogRead(potentiometer1_pin);
   
   //potentiometer1_value = 100;
-  Serial.println(potentiometer1_value); //para ver el valor que toma el potenciometro en el monitor serial
-  delay(500);
+  //Serial.println(potentiometer1_value); //para ver el valor que toma el potenciometro en el monitor serial
 
   if (potentiometer1_value <= 819){ //AND
- 
-    if (button1_value == 0 && button2_value == 0){ 
+
+    if (button1_value && button2_value){ 
       color(0, 255, 255);  //ROJO
-      
+      delay(1000);      
     }
     
-    else if (button1_value == 0 && button2_value == 1){ 
-      color(255, 255, 255);  //apagado
+   else if ((button1_value == 0) && (button2_value == 0)){
+      color(0, 255, 255);
+      delay(1000);
+   }
+    
+    else{
+      color(255, 255, 255);
+      delay(1000);
     }
     
-    else if (button1_value == 1 && button2_value == 0){
-      color(255, 255, 255);  //apagado
-    }
-    
-    else {
-      color(0, 255, 255);  //color rojo
-    }
-    
-    color(255, 255, 255);
   }
   
  /* else if (potentiometer1_value > 819 && potentiometer1_value <= 1638 ){ //OR
