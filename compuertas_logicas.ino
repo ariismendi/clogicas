@@ -38,8 +38,8 @@ void setup(){
 //Ahora sí configuramos entradas y salidas con pinmode:
 
   Serial.begin(115200);
-  pinMode (button1value_pin, INPUT);
-  pinMode (button2value_pin, INPUT);
+  pinMode (button1value_pin, INPUT_PULLUP);
+  pinMode (button2value_pin, INPUT_PULLUP);
 
   
   ledcAttachPin(greenLed, ledChannel0);
@@ -50,14 +50,10 @@ void setup(){
  ledcSetup(ledChannel1, freq, resolution);
  ledcSetup(ledChannel2, freq, resolution);
 
-  digitalWrite(greenLed, HIGH);
-  digitalWrite(redLed, HIGH);
-  digitalWrite(blueLed, HIGH);
-  delay(1000);
 }
  
 void loop(){
-  
+
   //lectura de pulsadores
   button1_value = digitalRead(button1value_pin);
   button2_value = digitalRead(button2value_pin);
@@ -76,27 +72,26 @@ void loop(){
   Serial.println(potentiometer1_value); //para ver el valor que toma el potenciometro en el monitor serial
   delay(500);
 
-  if ((potentiometer1_value >= 0) && (potentiometer1_value <= 819)){ //AND
-    
+  if (potentiometer1_value <= 819){ //AND
+ 
     if (button1_value == 0 && button2_value == 0){ 
-      color(0, 0, 0);  //apagado
-      delay(1000);    
+      color(0, 255, 255);  //ROJO
+      
     }
     
     else if (button1_value == 0 && button2_value == 1){ 
-      color(0, 0, 0);  //apagado
-      delay(1000);     
+      color(255, 255, 255);  //apagado
     }
     
     else if (button1_value == 1 && button2_value == 0){
-      color(0, 0, 0);  //apagado
-      delay(1000);
+      color(255, 255, 255);  //apagado
     }
     
     else {
-      color(255, 0, 0);  //color rojo
-      delay(1000);
+      color(0, 255, 255);  //color rojo
     }
+    
+    color(255, 255, 255);
   }
   
  /* else if (potentiometer1_value > 819 && potentiometer1_value <= 1638 ){ //OR
