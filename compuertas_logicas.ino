@@ -1,8 +1,20 @@
 /**
 ********   Simulación Compuertas Lógicas   *******
  * 
- * 
- * 
+ En esta tarea del Electivo de Telemática 2, se programará la ESP32
+ para realizar una tarea simple de Compuertas Lógicas, utilizando un Led RGB, 
+ un potenciómetro, y dos pulsadores.
+
+ In the next homework of "Electivo de Telemática 2", we are programmed an ESP32
+ to do a simple task of Logical Gates, for this work, we usea a RGB Led, a potentiometer
+ and two button switches.
+ 
+ Autor: Mauricio Arismendi Aedo  --> m.arismendi02@ufromail.cl
+ Profesor: Erik Soto Alvarado
+ Asignatura: IIE208, Electivo de Telemática 2, 2020. 
+      ***Universidad de La Frontera***
+            *****Temuco, Chile*****
+ 
  */
  
 //Input
@@ -37,18 +49,31 @@ void setup(){
   
 //Ahora sí configuramos entradas y salidas con pinmode:
 
-  Serial.begin(115200);
-  pinMode (button1value_pin, INPUT_PULLUP);
+  Serial.begin(115200); //leemos en 115200 baudios
+  
+  //inicializamos los pulsadores como entrada y su resistencia pullup interna
+  pinMode (button1value_pin, INPUT_PULLUP); 
   pinMode (button2value_pin, INPUT_PULLUP);
 
-  
+  //Inicializamos los RGB mediante el código dado por el fabricante
+
+  /*Preparamos los led con los siguientes parametros:
+  * Canal PWM, Frecuencia, que puede variar entre 5000 (es suficiente, para que 
+  * el ojo humano no detecte la variación)
+  * Resolución: de 1 a 16 bits, 8 es suficiente 
+  * en nuestro caso influirá en el brillo del led
+  */
+ ledcSetup(ledChannel0, freq, resolution);
+ ledcSetup(ledChannel1, freq, resolution);
+ ledcSetup(ledChannel2, freq, resolution);
+
+  /*Estas funciones fijan cada pin del controlador al led de destino
+   * Los parámetros son: pin, channel PWM (el ESP32 tiene 16)
+   */
   ledcAttachPin(greenLed, ledChannel0);
   ledcAttachPin(redLed, ledChannel1);
   ledcAttachPin(blueLed, ledChannel2);
  
- ledcSetup(ledChannel0, freq, resolution);
- ledcSetup(ledChannel1, freq, resolution);
- ledcSetup(ledChannel2, freq, resolution);
 
 }
  
@@ -79,7 +104,7 @@ void loop(){
     }
        
     else{
-      color(255, 255, 255);
+      color(255, 255, 255); //apagado
       delay(1000);
     }
     
@@ -111,7 +136,7 @@ void loop(){
       }
   }
   
-  else if ((potentiometer1_value > 2457) && (potentiometer1_value <= 3276)){//NOR
+  else if ((potentiometer1_value > 2457) && (potentiometer1_value <= 3276)){   //NOR
     
       if (button1_value || button2_value){ 
       color(255, 255, 255);  //apagado
@@ -119,19 +144,19 @@ void loop(){
       }
       
       else{ 
-      color(255, 255, 0);  //apagado
+      color(255, 255, 0);  //azul
       delay(1000);
       }
   }
   
-  else { //XOR
+  else {                                //XOR
     if (button1_value ^ button2_value){ 
-      color(255, 0, 255); 
+      color(255, 0, 255); //verde
       delay(1000);
       }
       
       else { 
-      color(255, 255, 255);
+      color(255, 255, 255); //apagado
       delay(1000);
       }
   }
