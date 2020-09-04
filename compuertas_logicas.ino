@@ -23,10 +23,11 @@ int button1value_pin  = 22;
 int button2value_pin  = 23;
 int potentiometer1_pin = 36;
 
-//Inicializacion
+//Inicializacion botones ambos con valor == TRUE (1)  
 
-bool button1_value = 0;
-bool button2_value = 0;
+bool button1_value;
+bool button2_value;
+
 
 int potentiometer1_value;
 
@@ -87,14 +88,14 @@ void loop(){
  // button2value = 1;
   
   //Representar salida pulsador en monitor serial
-//  Serial.print(button1_value);
-//  Serial.print(button2_value);
+  Serial.print(button1_value);
+  Serial.print(button2_value);
   
   //lectura potenciometro
   potentiometer1_value = analogRead(potentiometer1_pin);
   
   //potentiometer1_value = 100;
-  Serial.println(potentiometer1_value); //para ver el valor que toma el potenciometro en el monitor serial
+  //Serial.println(potentiometer1_value); //para ver el valor que toma el potenciometro en el monitor serial
 
  if (potentiometer1_value <= 819){ //AND
   
@@ -162,7 +163,11 @@ void loop(){
   }
 }
 
-void color(int red, int green, int blue){
+//Esta función simplifica la tarea tediosa de escribir el codigo de los colores
+
+void color(int red, int green, int blue){ 
+  
+  //Fijaremos 0 como el valor máximo, y 255 como el mínimo 
   
   //Escritura de PWM verde
   ledcWrite(ledChannel0, 255-green);
