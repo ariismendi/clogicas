@@ -1,6 +1,7 @@
 /**
+ * 
 ********   Simulación Compuertas Lógicas   *******
-
+*   
   En esta tarea del Electivo de Telemática 2, se programará la ESP32
   para realizar una tarea simple de Compuertas Lógicas, utilizando un Led RGB,
   un potenciómetro, y dos pulsadores.
@@ -14,34 +15,33 @@
   Asignatura: IIE208, Electivo de Telemática 2, 2020.
       ***Universidad de La Frontera***
             *****Temuco, Chile*****
-
 */
 
 //Input
 
-int button1value_pin  = 22;
-int button2value_pin  = 23;
-int potentiometer1_pin = 36;
+byte button1value_pin  = 22;
+byte button2value_pin  = 23;
+byte potentiometer1_pin = 36;
 
 //Inicializacion botones ambos con valor == TRUE (1)
 
 bool button1_value;
 bool button2_value;
-int potentiometer1_value;
+byte potentiometer1_value;
 
 // output
 
 // --- RGB ---
-int greenLed = 12;
-int redLed   = 13;
-int blueLed  = 17;
+byte greenLed = 12;
+byte redLed   = 13;
+byte blueLed  = 17;
 
 // Propiedades de la señal a usar
 int freq = 5000;
-int ledChannel0 = 0;
-int ledChannel1 = 1;
-int ledChannel2 = 2;
-int resolution = 8;
+byte ledChannel0 = 0;
+byte ledChannel1 = 1;
+byte ledChannel2 = 2;
+byte resolution = 8;
 
 void setup() {
 
