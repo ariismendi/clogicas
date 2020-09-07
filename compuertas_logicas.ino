@@ -25,9 +25,9 @@ byte potentiometer1_pin = 36;
 
 //Inicializacion botones ambos con valor == TRUE (1)
 
-bool button1_value;
-bool button2_value;
-byte potentiometer1_value;
+boolean button1_value;
+boolean button2_value;
+int potentiometer1_value;
 
 // output
 
